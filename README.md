@@ -145,6 +145,68 @@ copy 0.json + 1.json + 2.json + 3.json + 4.json + 5.json + 6.json + 7.json + 8.j
 
 – Save INDEX URL
 
+### 2. Setting up config file
+
+```
+cp config_sample.env config.env
+```
+
+- Remove the first line saying:
+
+```
+_____REMOVE_THIS_LINE_____=True
+```
+
+Fill up rest of the fields. Meaning of each field is discussed below. **NOTE**: All values must be filled between quotes, even if it's `Int`, `Bool` or `List`.
+
+**1. Required Fields**
+
+- `BOT_TOKEN`: The Telegram Bot Token that you got from [@BotFather](https://t.me/BotFather). `Str`
+- `OWNER_ID`: The Telegram User ID (not username) of the Owner of the bot. `Int`
+- `TELEGRAM_API`: This is to authenticate your Telegram account for downloading Telegram files. You can get this from <https://my.telegram.org>. `Int`
+- `TELEGRAM_HASH`: This is to authenticate your Telegram account for downloading Telegram files. You can get this from <https://my.telegram.org>. `Str`
+- `BASE_URL`: Valid BASE URL where the bot is deployed to use torrent web files selection. Format of URL should be `http://myip`, where `myip` is the IP/Domain(public) of your bot or if you have chosen port other than `80` so write it in this format `http://myip:port` (`http` and not `https`). `Str`
+- `BASE_URL_PORT`: Which is the **BASE_URL** Port. Default is `80`. `Int`
+- `USE_SERVICE_ACCOUNTS`: Whether to use Service Accounts or not, with google-api-python-client. For this to work see [Using Service Accounts](https://github.com/anasty17/mirror-leech-telegram-bot#generate-service-accounts-what-is-service-account) section below. Default is `False`. `Bool`
+    
+### GDrive Tools
+
+- `GDRIVE_ID`: This is the Folder/TeamDrive ID of the Google Drive OR `root` to which you want to upload all the mirrors using google-api-python-client. `Str`
+- `IS_TEAM_DRIVE`: Set `True` if uploading to TeamDrive using google-api-python-client. Default is `False`. `Bool`
+- `INDEX_URL`: Refer to <https://gitlab.com/ParveenBhadooOfficial/Google-Drive-Index>. `Str`
+- `STOP_DUPLICATE`: Bot will check file/folder name in Drive incase uploading to `GDRIVE_ID`. If it's present in Drive then downloading or cloning will be stopped. (**NOTE**: Item will be checked using name and not hash, so this feature is not perfect yet). Default is `False`. `Bool`
+  
+### Deploy docker 
+
+- Install docker-compose
+
+```
+sudo apt install docker-compose
+```
+
+- Build and run Docker image or to view current running image:
+
+```
+sudo docker-compose up
+```
+
+- After editing files with nano for example (nano start.sh):
+
+```
+sudo docker-compose up --build
+```
+
+- To stop the running image:
+
+```
+sudo docker-compose stop
+```
+
+- To run the image:
+
+```
+sudo docker-compose start
+```
 This is a Telegram Bot written in Python for mirroring files on the Internet to your Google Drive, Telegram or to any rclone supported cloud. Based on [python-aria-mirror-bot](https://github.com/lzzy12/python-aria-mirror-bot)
 
 # Features
